@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<head>
+  <!-- Required meta tags-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>Pomodoro</title>
+  <!-- Optional JavaScript-->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:700&amp;display=swap" rel="stylesheet">
+  <link href=" https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./style/ringTones.css">
+</head>
+<body>
+  <div class="container-fluid" id="index">
+    <div class="row">
+      <div class="col-9 d-flex flex-row" id="left_side">
+        <div class="col-6" id="sidebar">
+          <div class="icon"><a href="todoList.html"><i class="fas fa-list-ul fa-2x"></i>
+              <label>TO-DO LIST</label></a></div>
+          <div class="icon"><a href="analytics.html"><i class="fas fa-chart-bar fa-2x"></i>
+              <label>ANALYTICS</label></a></div>
+          <div class="icon"><i class="fas fa-music fa-2x"></i>
+            <label>RINGTONES</label>
+          </div>
+          <div id="big_circle"><a href="index.html">
+              <div id="small_circle">
+                <div id="big_border_circle"><i class="fas fa-caret-right fa-5x"></i></div>
+                <div id="progress_bar" ref="progress"></div>
+              </div></a>
+            <div id="clock">
+              <div id="min">
+                <template v-if="minZero">{{ "0" + time.min }}</template>
+                <template v-else="minZero">{{ time.min }}</template>
+              </div>:
+              <div id="second">
+                <template v-if="secZero">{{ "0" + time.second }}</template>
+                <template v-else="secZero">{{ time.second }}</template>
+              </div>
+            </div>
+            <label class="circle_label">{{ todos[0].content }}</label>
+          </div>
+        </div>
+        <div class="col-6 d-flex flex-column" id="option">
+          <div class="row d-flex flex-column" id="work">
+            <h3>WORK</h3>
+            <div class="d-flex justify-content-around">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input" id="none" type="radio" name="radio" value="none"><span class="checkmark"></span>
+                  <label class="form-check-label" for="none">NONE</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="alert" type="radio" name="radio" value="alert"><span class="checkmark"></span>
+                  <label class="form-check-label" for="alert">ALERT</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="bird" type="radio" name="radio" value="bird"><span class="checkmark"></span>
+                  <label class="form-check-label" for="birdv">BIRD</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="drop" type="radio" name="radio" value="drop"><span class="checkmark"></span>
+                  <label class="form-check-label" for="drop">DROP</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="ring" type="radio" name="radio" value="ring"><span class="checkmark"></span>
+                  <label class="form-check-label" for="ring">RING</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input" id="default" type="radio" name="radio" value="default" checked="checked"><span class="checkmark"></span>
+                  <label class="form-check-label" for="default">DEFAULT</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="beep" type="radio" name="radio" value="beep"><span class="checkmark"></span>
+                  <label class="form-check-label" for="beep">BEEP</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="bugle" type="radio" name="radio" value="bugle"><span class="checkmark"></span>
+                  <label class="form-check-label" for="bugle">BUGLE</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="horn" type="radio" name="radio" value="horn"><span class="checkmark"></span>
+                  <label class="form-check-label" for="horn">HORN</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="warning" type="radio" name="radio" value="warning"><span class="checkmark"></span>
+                  <label class="form-check-label" for="warning">WARNING</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input" id="alarm" type="radio" name="radio" value="alarm"><span class="checkmark"></span>
+                  <label class="form-check-label" for="alarm">ALARM</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="bell" type="radio" name="radio" value="bell"><span class="checkmark"></span>
+                  <label class="form-check-label" for="bell">BELL</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="digital" type="radio" name="radio" value="digital"><span class="checkmark"></span>
+                  <label class="form-check-label" for="digital">DIGITAL</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="music" type="radio" name="radio" value="music"><span class="checkmark"></span>
+                  <label class="form-check-label" for="music">MUSIC</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="whistle" type="radio" name="radio" value="whistle"><span class="checkmark"></span>
+                  <label class="form-check-label" for="whistle">WHISTLE</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex flex-column" id="break">
+            <h3>BREAK</h3>
+            <div class="d-flex justify-content-around">
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input" id="none" type="radio" name="radio2" value="none"><span class="checkmark"></span>
+                  <label class="form-check-label" for="none">NONE</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="alert" type="radio" name="radio2" value="alert" checked="checked"><span class="checkmark"></span>
+                  <label class="form-check-label" for="alert">ALERT</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="bird" type="radio" name="radio2" value="bird"><span class="checkmark"></span>
+                  <label class="form-check-label" for="birdv">BIRD</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="drop" type="radio" name="radio2" value="drop"><span class="checkmark"></span>
+                  <label class="form-check-label" for="drop">DROP</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="ring" type="radio" name="radio2" value="ring"><span class="checkmark"></span>
+                  <label class="form-check-label" for="ring">RING</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input" id="default" type="radio" name="radio2" value="default"><span class="checkmark"></span>
+                  <label class="form-check-label" for="default">DEFAULT</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="beep" type="radio" name="radio2" value="beep"><span class="checkmark"></span>
+                  <label class="form-check-label" for="beep">BEEP</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="bugle" type="radio" name="radio2" value="bugle"><span class="checkmark"></span>
+                  <label class="form-check-label" for="bugle">BUGLE</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="horn" type="radio" name="radio2" value="horn"><span class="checkmark"></span>
+                  <label class="form-check-label" for="horn">HORN</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="warning" type="radio" name="radio2" value="warning"><span class="checkmark"></span>
+                  <label class="form-check-label" for="warning">WARNING</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input" id="alarm" type="radio" name="radio2" value="alarm"><span class="checkmark"></span>
+                  <label class="form-check-label" for="alarm">ALARM</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="bell" type="radio" name="radio2" value="bell"><span class="checkmark"></span>
+                  <label class="form-check-label" for="bell">BELL</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="alarm" type="radio" name="radio2" value="digital"><span class="checkmark"></span>
+                  <label class="form-check-label" for="digital">DIGITAL</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="music" type="radio" name="radio2" value="music"><span class="checkmark"></span>
+                  <label class="form-check-label" for="music">MUSIC</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" id="whistle" type="radio" name="radio2" value="whistle"><span class="checkmark"></span>
+                  <label class="form-check-label" for="whistle">WHISTLE</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 d-flex flex-row" id="right_side">
+        <div class="col-8"></div>
+        <div class="col-4">
+          <div class="d-flex align-items-end flex-column" id="sidebar"><a href="index.html"><i class="fas fa-times fa-2x"></i></a>
+            <div class="mt-auto p-2 title">POMODORO</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.1.1/vuex.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.15/dayjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.js"></script>
+  <script src="./js/index.js"></script>
+</body>
