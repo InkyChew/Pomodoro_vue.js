@@ -1,0 +1,178 @@
+$bg-pink: #FFEDF7
+$primary-pink: #FF4384
+$primary-blue: #003164
+
+*
+  font-family: 'Roboto'
+  font-weight: bold
+
+#index
+  background-color: $primary-blue
+  .row
+    height: 100vh
+    #left_side.col-9
+      #sidebar.col-6
+        padding-right: 85px
+        padding-bottom: 48px
+        .icon
+          padding-left: 85px
+          padding-top: 48px
+          color: $primary-pink
+          a
+            color: rgba(255, 255, 255, 0.3)
+            text-decoration: none
+            &:hover
+              color: white
+          i
+            cursor: pointer
+            display: inline
+            margin-right: 10px
+          label
+            cursor: pointer
+            font-size: 36px
+      #big_border_circle
+        position: absolute
+        z-index: 4
+        bottom: -10%
+        right: -10%
+        height: 120px
+        width: 120px
+        border-radius: 50%
+        border-style: solid
+        border-width: 3px
+        border-color: $primary-pink
+      #big_circle
+        position: absolute
+        z-index: 2
+        bottom: 0
+        margin-left: 85px;
+        height: 180px
+        width: 350px
+        border-top-left-radius: 350px
+        border-top-right-radius: 350px
+        background-color: $bg-pink
+        i
+          position: absolute
+          z-index: 5
+          top: 16%
+          right: 32%
+          color: white
+      #small_circle
+        position: absolute
+        z-index: 3
+        left: 33%;
+        bottom: 59%;
+        height: 130px
+        width: 130px
+        border-radius: 50%
+        border-style: solid
+        border-width: 15px
+        border-color: $primary-blue
+        background-color: $primary-pink
+      #clock
+        position: absolute
+        top: 28%;
+        left: 22%;
+        display: flex
+        font-size: 76px
+        color: $primary-pink
+      .circle_label
+        color: $primary_blue
+        position: absolute
+        bottom: 0%;
+        left: 17%;
+      #option.col-6
+        height: 100vh
+        color: white
+        #addNew
+          padding-top: 48px
+          input.form-control
+            position: relative
+            border-color: white  
+            color: $primary-pink
+            overflow: auto
+          i
+            position: absolute
+            top: 7%
+            right: 5%
+            color: $primary-pink
+            float: right
+          ::placeholder
+            color: $primary-pink
+            font-style: italic
+        
+        .row   
+          padding-top: 48px
+          .card
+            background-color: transparent
+            font-size: 16px
+            .card-header
+              background-color: rgba(255, 255, 255, 0.2)
+              font-size: 24px
+              padding: 10px 24px;      
+            li
+              background-color: transparent
+              border-color: rgba(255, 255, 255, 0.2)
+            .completed
+              text-decoration-line: line-through
+            .form-check
+              input
+                position: absolute
+                z-index: 5
+                opacity: 0
+                cursor: pointer
+                height: 24px
+                width: 24px
+              span.checkmark
+                position: absolute
+                top: 0
+                left: 0
+                height: 24px
+                width: 24px
+                border-radius: 50%
+                border-style: solid
+                border-color: white
+              span.checkmark:after
+                content: ""
+                position: absolute
+                display: none
+              .form-check-input:checked ~ .checkmark:after
+                display: block
+              span.checkmark:after
+                left: 6px
+                top: 4px
+                width: 5px
+                height: 10px
+                border: solid white
+                border-width: 0 3px 3px 0
+                -webkit-transform: rotate(45deg)
+                -ms-transform: rotate(45deg)
+                transform: rotate(45deg)
+              .form-check-label
+                padding-left: 10px
+            a
+              color: white
+              text-decoration: none
+              &:hover
+                color: $primary-pink
+          
+    #right_side.col-3
+      .col-8
+        height: 100vh
+      .col-4        
+        #sidebar
+          padding-right: 85px
+          padding-bottom: 48px
+          height: 100vh
+          color: white
+          a
+            color: white
+            text-decoration: none
+            &:hover
+              color: $primary-pink
+            i
+              display: flex
+              padding-top: 48px
+          .title            
+            font-size: 24px
+            writing-mode: vertical-lr

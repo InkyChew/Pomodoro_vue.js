@@ -1,0 +1,208 @@
+
+$bg-pink: #FFEDF7
+$primary-pink: #FF4384
+$primary-blue: #003164
+
+*
+  font-family: 'Roboto'
+  font-weight: bold
+
+#big_border_circle
+  position: absolute
+  z-index: 2
+  top: 20%
+  right: 18%
+  height: 600px
+  width: 600px
+  border-radius: 50%
+  border-style: solid
+  border-width: 5px
+  border-color: $primary-pink
+  #progress_bar
+    position: absolute
+    z-index: 2
+    top: -1%
+    right: -1%
+    height: 600px
+    width: 600px
+  #big_circle
+    position: absolute
+    z-index: 3
+    top: 5%
+    right: 5%
+    height: 530px
+    width: 530px
+    border-radius: 50%
+    border-style: solid
+    border-width: 5px
+    border-color: $primary-pink
+    background-color: $primary-pink
+    &.stop
+      background-color: white
+    i
+      position: absolute
+      z-index: 4
+      top: 40%
+      right: 40%
+      color: white
+    .fa-pause-circle      
+      color: $primary-pink
+    input
+      z-index: 5
+      position: absolute
+      width: 112px
+      height: 112px
+      right: 40%
+      top: 40%
+      opacity: 0
+.col-8
+  background-color: $bg-pink
+  .form-group
+    margin-left: 85px
+    margin-bottom: 0px
+    height: 100vh
+    #addNew
+      padding-top: 48px
+      input.form-control
+        position: relative
+        border-color: white  
+        color: $primary-pink
+        overflow: auto
+        width: 445px
+        height: 56px
+      i
+        position: absolute
+        top: 7%
+        right: 7%
+        color: $primary-pink
+        float: right
+      ::placeholder
+        color: $primary-pink
+        font-style: italic
+    #thingsToDo1
+      width: 445px
+      margin-top: 180px
+      font-size: 24px
+      color: $primary-blue
+      display: flex
+      .form-check
+        input
+          position: absolute
+          z-index: 5
+          opacity: 0
+          cursor: pointer
+          height: 50px
+          width: 50px
+        span.checkmark
+          position: absolute
+          top: 0
+          left: 0
+          height: 50px
+          width: 50px
+          border-radius: 50%
+          border-style: solid
+          border-color: $primary-blue
+        span.checkmark:after
+          content: ""
+          position: absolute
+          display: none
+        .form-check-input:checked ~ .checkmark:after
+          display: block
+        span.checkmark:after
+          left: 15px
+          top: 5px
+          width: 15px
+          height: 30px
+          border: solid $primary-blue
+          border-width: 0 5px 5px 0
+          -webkit-transform: rotate(45deg)
+          -ms-transform: rotate(45deg)
+          transform: rotate(45deg)
+        .form-check-label
+          margin-left: 50px
+        .completed
+          text-decoration: line-through
+    #things
+      .completed
+        text-decoration: line-through
+    #clock
+      display: flex
+      font-size: 176px
+      color: $primary-pink
+    #things
+      margin-bottom: 70px
+      font-size: 16px
+      color: $primary-blue
+      a
+        color: $primary-blue
+        &:hover
+          color: $primary-pink
+      .form-check
+        width: 445px
+        height: 32px
+        display: flex
+        justify-content: space-between
+        color: $primary-blue
+        border-bottom: 2px solid silver
+        margin-bottom: 9px
+        input
+          position: absolute
+          z-index: 5
+          opacity: 0
+          cursor: pointer
+          height: 24px
+          width: 24px
+        span.checkmark
+          position: absolute
+          top: 0
+          left: 0
+          height: 24px
+          width: 24px
+          border-radius: 50%
+          border-style: solid
+          border-color: $primary-blue
+        span.checkmark:after
+          content: ""
+          position: absolute
+          display: none
+        .form-check-input:checked ~ .checkmark:after
+          display: block
+        span.checkmark:after
+          left: 6px
+          top: 4px
+          width: 5px
+          height: 10px
+          border: solid $primary-blue
+          border-width: 0 3px 3px 0
+          -webkit-transform: rotate(45deg)
+          -ms-transform: rotate(45deg)
+          transform: rotate(45deg)
+        .form-check-label
+          padding-left: 10px
+      .more
+        position: absolute
+        right: 5%
+        color: $primary-pink
+#rightside.col-4
+  background-color: $primary-blue
+  .col-8
+    background-color: $primary-blue
+  .col-4
+    #sidebar
+      height: 100vh
+      padding-right: 85px
+      padding-bottom: 48px
+      .icon
+        color: white
+        a
+          color: white
+          text-decoration: none
+          &:hover
+            color: $primary-pink
+          i
+            display: flex
+            padding-top: 48px
+      .title
+        color: white
+        font-size: 24px
+        writing-mode: vertical-lr

@@ -1,0 +1,111 @@
+doctype html
+head
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  // Bootstrap CSS
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+  title Pomodoro
+  // Optional JavaScript
+  // jQuery first, then Popper.js, then Bootstrap JS
+  script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+  
+  link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet")
+  link(href="https://fonts.googleapis.com/css?family=Roboto:700&display=swap" rel="stylesheet")
+  link(href=" https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" rel="stylesheet")
+
+  link(rel="stylesheet" type="text/css" href="./style/index.css")
+body
+  #index.container-fluid
+    #big_border_circle
+      #progress_bar(ref="progress")
+      #big_circle(:class="{stop : parse}")
+        template(v-if="parse")
+          i.fas.fa-pause-circle.fa-7x
+        template(v-if="parse === false")
+          i.fas.fa-play-circle.fa-7x  
+        input(
+          type="checkbox",
+          v-model="parse"
+          @click="timer"
+        )
+    .row
+      .col-8
+        .form-group.col-sm-6.d-flex.align-items-end.flex-column
+          #addNew
+            input.form-control(
+              v-model="newMission"
+              type='text'
+              @click="newMission=''"
+              @blur="newMission='ADD A NEW MISSION'"
+              @keypress.enter="addNewMission(newMission)"
+            )
+            a(
+              href="javascript:;"
+              @click="addNewMission(newMission)"
+            )
+              i.fas.fa-plus
+          #thingsToDo1
+            .form-check
+              input.form-check-input(
+                type='checkbox'
+                v-model='todos[0].completed'
+              )
+              span.checkmark
+              label.form-check-label(
+                for='thingsToDo1'
+                :class="{completed : todos[0].completed}"
+              )
+                | {{ todos[0].content }}
+          #clock.my-auto
+            #min
+              template(v-if="minZero") {{ "0" + time.min }}
+              template(v-else="minZero") {{ time.min }}
+            |:
+            #second
+              template(v-if="secZero") {{ "0" + time.second }}
+              template(v-else="secZero") {{ time.second }}
+          #things.mt-auto
+            template(
+              v-for="(todo, i) in todos"
+              v-if="1<=i && !todo.completed"
+            )
+              .form-check
+                input#thingsToDo.form-check-input(
+                  type='checkbox',
+                  v-model='todo.completed'
+                )
+                span.checkmark
+                label.form-check-label(                  
+                  for='thingsToDo'
+                  :class="{completed : todo.completed}"
+                )
+                 | {{ todo.content }}
+                a(
+                  href="javascript:;"
+                  @click="switchToFirst(i)"
+                )
+                  i.far.fa-play-circle.fa-lg
+            a(href="/todoList.html")
+              .more MORE
+      #rightside.col-4
+        .row
+          .col-8
+          .col-4
+            #sidebar.d-flex.align-items-end.flex-column
+              .icon.p-2
+                a(href='todoList.html')
+                  i.fas.fa-list-ul.fa-2x
+                a(href='analytics.html')
+                  i.fas.fa-chart-bar.fa-2x
+                a(href='ringTones.html')
+                  i.fas.fa-music.fa-2x
+              .mt-auto.p-2.title POMODORO
+
+  script(src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js")
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.1.1/vuex.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.15/dayjs.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.js')  
+  script(src="./js/index.js")

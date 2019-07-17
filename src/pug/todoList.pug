@@ -1,0 +1,120 @@
+doctype html
+head
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  // Bootstrap CSS
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+  title Pomodoro
+  // Optional JavaScript
+  // jQuery first, then Popper.js, then Bootstrap JS
+  script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+  
+  script(src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js")
+  link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet")
+  link(href="https://fonts.googleapis.com/css?family=Roboto:700&display=swap" rel="stylesheet")
+  link(href=" https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" rel="stylesheet")
+
+  link(rel="stylesheet" type="text/css" href="./style/todoList.css")
+body
+  #index.container-fluid
+    .row
+      #left_side.col-9.d-flex.flex-row
+        #sidebar.col-6
+          .icon            
+              i.fas.fa-list-ul.fa-2x
+              label TO-DO LIST
+          .icon
+            a(href='analytics.html')
+              i.fas.fa-chart-bar.fa-2x
+              label ANALYTICS
+          .icon
+            a(href='ringTones.html')
+              i.fas.fa-music.fa-2x
+              label RINGTONES          
+          #big_circle
+            a(
+              href="index.html"
+            )
+              #small_circle
+                #big_border_circle
+                  i.fas.fa-caret-right.fa-5x
+                #progress_bar(ref="progress")
+            #clock
+              #min
+                template(v-if="minZero") {{ "0" + time.min }}
+                template(v-else="minZero") {{ time.min }}
+              |:
+              #second
+                template(v-if="secZero") {{ "0" + time.second }}
+                template(v-else="secZero") {{ time.second }}
+            label.circle_label {{ todos[0].content }}
+        #option.col-6.d-flex.flex-column
+          #addNew
+            input.form-control(
+              v-model="newMission"
+              type='text'
+              @click="newMission=''"
+              @blur="newMission='ADD A NEW MISSION'"
+              @keypress.enter="addNewMission(newMission)"
+            )
+            a(
+              href="javascript:;"
+              @click="addNewMission(newMission)"
+            )
+              i.fas.fa-plus
+          .row.d-flex.flex-column
+            .card
+              .card-header
+                | TO-DO
+              ul.list-group.list-group-flush
+                li.list-group-item.d-flex.justify-content-between(
+                  v-for="(todo, index) in todos"
+                  v-if="todo.completed === false"
+                )
+                  .form-check
+                    input#thingsToDo.form-check-input(
+                      type='checkbox',
+                      v-model='todo.completed'
+                    )
+                    span.checkmark
+                    label.form-check-label(for='thingsToDo')
+                    | {{ todo.content }}
+                  a(
+                    href="javascript:;"
+                    @click="switchToFirst(index)"
+                  )
+                    i.far.fa-play-circle.fa-lg
+          .row.d-flex.flex-column
+            .card
+              .card-header
+                | DONE
+              ul.list-group.list-group-flush
+                li.list-group-item.d-flex.justify-content-between(
+                  v-for="(todo,index) in todos"
+                  v-if="todo.completed === true"
+                  :class="{completed : todo.completed}"
+                )
+                  .form-check
+                    input#thingsToDo.form-check-input(
+                      type='checkbox'
+                      v-model = 'todo.completed'
+                    )
+                    span.checkmark
+                    label.form-check-label(for='thingsToDo')
+                    | {{ todo.content }}
+      #right_side.col-3.d-flex.flex-row
+        .col-8
+        .col-4
+          #sidebar.d-flex.align-items-end.flex-column
+            a(href='index.html')
+              i.fas.fa-times.fa-2x
+            .mt-auto.p-2.title POMODORO
+
+  script(src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js")
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.1.1/vuex.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.15/dayjs.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.js')
+  script(src="./js/index.js")

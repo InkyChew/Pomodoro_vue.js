@@ -1,0 +1,324 @@
+doctype html
+head
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  // Bootstrap CSS
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+  title Pomodoro
+  // Optional JavaScript
+  // jQuery first, then Popper.js, then Bootstrap JS
+  script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+  
+  script(src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js")
+  link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet")
+  link(href="https://fonts.googleapis.com/css?family=Roboto:700&display=swap" rel="stylesheet")
+  link(href=" https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" rel="stylesheet")
+
+  link(rel="stylesheet" type="text/css" href="./style/ringTones.css")
+body
+  #index.container-fluid
+    .row
+      #left_side.col-9.d-flex.flex-row
+        #sidebar.col-6
+          .icon
+            a(href='todoList.html')
+              i.fas.fa-list-ul.fa-2x
+              label TO-DO LIST
+          .icon
+            a(href='analytics.html')
+              i.fas.fa-chart-bar.fa-2x
+              label ANALYTICS
+          .icon
+              i.fas.fa-music.fa-2x
+              label RINGTONES
+          #big_circle
+            a(
+              href="index.html"
+            )
+              #small_circle
+                #big_border_circle
+                  i.fas.fa-caret-right.fa-5x
+                #progress_bar(ref="progress")
+            #clock
+              #min
+                template(v-if="minZero") {{ "0" + time.min }}
+                template(v-else="minZero") {{ time.min }}
+              |:
+              #second
+                template(v-if="secZero") {{ "0" + time.second }}
+                template(v-else="secZero") {{ time.second }}
+            label.circle_label {{ todos[0].content }}
+        #option.col-6.d-flex.flex-column
+          #work.row.d-flex.flex-column
+            h3 WORK
+            .d-flex.justify-content-around
+              .col
+                .form-check
+                  input#none.form-check-input(
+                  type='radio', 
+                  name='radio', 
+                  value='none')
+                  span.checkmark
+                  label.form-check-label(for='none')
+                    | NONE
+                .form-check
+                  input#alert.form-check-input(
+                  type='radio', 
+                  name='radio', 
+                  value='alert')
+                  span.checkmark
+                  label.form-check-label(for='alert')
+                    | ALERT
+                .form-check
+                  input#bird.form-check-input(
+                  type='radio', 
+                  name='radio', 
+                  value='bird')
+                  span.checkmark
+                  label.form-check-label(for='birdv')
+                    | BIRD
+                .form-check
+                  input#drop.form-check-input(
+                  type='radio', 
+                  name='radio', 
+                  value='drop')
+                  span.checkmark
+                  label.form-check-label(for='drop')
+                    | DROP
+                .form-check
+                  input#ring.form-check-input(
+                  type='radio', 
+                  name='radio', 
+                  value='ring')
+                  span.checkmark
+                  label.form-check-label(for='ring')
+                    | RING
+              .col
+                .form-check
+                  input#default.form-check-input(
+                  type='radio', 
+                  name='radio', 
+                  value='default',
+                  checked="checked"
+                  )
+                  span.checkmark
+                  label.form-check-label(for='default')
+                    | DEFAULT
+                .form-check
+                  input#beep.form-check-input(
+                  type='radio', 
+                  name='radio', 
+                  value='beep')
+                  span.checkmark
+                  label.form-check-label(for='beep')
+                    | BEEP
+                .form-check
+                  input#bugle.form-check-input(
+                  type='radio', 
+                  name='radio', 
+                  value='bugle')
+                  span.checkmark
+                  label.form-check-label(for='bugle')
+                    | BUGLE
+                .form-check
+                    input#horn.form-check-input(
+                    type='radio', 
+                    name='radio', 
+                    value='horn')
+                    span.checkmark
+                    label.form-check-label(for='horn')
+                      | HORN
+                .form-check
+                  input#warning.form-check-input(
+                  type='radio', 
+                  name='radio', 
+                  value='warning')
+                  span.checkmark
+                  label.form-check-label(for='warning')
+                    | WARNING
+              .col
+                .form-check
+                    input#alarm.form-check-input(
+                    type='radio', 
+                    name='radio', 
+                    value='alarm')
+                    span.checkmark
+                    label.form-check-label(for='alarm')
+                      | ALARM
+                .form-check
+                    input#bell.form-check-input(
+                    type='radio', 
+                    name='radio', 
+                    value='bell')
+                    span.checkmark
+                    label.form-check-label(for='bell')
+                      | BELL
+                .form-check
+                    input#digital.form-check-input(
+                    type='radio', 
+                    name='radio', 
+                    value='digital')
+                    span.checkmark
+                    label.form-check-label(for='digital')
+                      | DIGITAL
+                .form-check
+                    input#music.form-check-input(
+                    type='radio', 
+                    name='radio', 
+                    value='music')
+                    span.checkmark
+                    label.form-check-label(for='music')
+                      | MUSIC
+                .form-check
+                    input#whistle.form-check-input(
+                    type='radio', 
+                    name='radio', 
+                    value='whistle')
+                    span.checkmark
+                    label.form-check-label(for='whistle')
+                      | WHISTLE
+          #break.row.d-flex.flex-column
+            h3 BREAK
+            .d-flex.justify-content-around
+              .col
+                .form-check
+                  input#none.form-check-input(
+                  type='radio', 
+                  name='radio2', 
+                  value='none')
+                  span.checkmark
+                  label.form-check-label(for='none')
+                    | NONE
+                .form-check
+                  input#alert.form-check-input(
+                  type='radio', 
+                  name='radio2', 
+                  value='alert',
+                  checked="checked"
+                )
+                  span.checkmark
+                  label.form-check-label(for='alert')
+                    | ALERT
+                .form-check
+                  input#bird.form-check-input(
+                  type='radio', 
+                  name='radio2', 
+                  value='bird')
+                  span.checkmark
+                  label.form-check-label(for='birdv')
+                    | BIRD
+                .form-check
+                  input#drop.form-check-input(
+                  type='radio', 
+                  name='radio2', 
+                  value='drop')
+                  span.checkmark
+                  label.form-check-label(for='drop')
+                    | DROP
+                .form-check
+                  input#ring.form-check-input(
+                  type='radio', 
+                  name='radio2', 
+                  value='ring')
+                  span.checkmark
+                  label.form-check-label(for='ring')
+                    | RING
+              .col
+                .form-check
+                  input#default.form-check-input(
+                  type='radio', 
+                  name='radio2', 
+                  value='default')
+                  span.checkmark
+                  label.form-check-label(for='default')
+                    | DEFAULT
+                .form-check
+                  input#beep.form-check-input(
+                  type='radio', 
+                  name='radio2', 
+                  value='beep')
+                  span.checkmark
+                  label.form-check-label(for='beep')
+                    | BEEP
+                .form-check
+                  input#bugle.form-check-input(
+                  type='radio', 
+                  name='radio2', 
+                  value='bugle')
+                  span.checkmark
+                  label.form-check-label(for='bugle')
+                    | BUGLE
+                .form-check
+                    input#horn.form-check-input(
+                    type='radio', 
+                    name='radio2', 
+                    value='horn')
+                    span.checkmark
+                    label.form-check-label(for='horn')
+                      | HORN
+                .form-check
+                  input#warning.form-check-input(
+                  type='radio', 
+                  name='radio2', 
+                  value='warning')
+                  span.checkmark
+                  label.form-check-label(for='warning')
+                    | WARNING
+              .col
+                .form-check
+                    input#alarm.form-check-input(
+                    type='radio', 
+                    name='radio2', 
+                    value='alarm')
+                    span.checkmark
+                    label.form-check-label(for='alarm')
+                      | ALARM
+                .form-check
+                    input#bell.form-check-input(
+                    type='radio', 
+                    name='radio2', 
+                    value='bell')
+                    span.checkmark
+                    label.form-check-label(for='bell')
+                      | BELL
+                .form-check
+                    input#alarm.form-check-input(
+                    type='radio', 
+                    name='radio2', 
+                    value='digital')
+                    span.checkmark
+                    label.form-check-label(for='digital')
+                      | DIGITAL
+                .form-check
+                    input#music.form-check-input(
+                    type='radio', 
+                    name='radio2', 
+                    value='music')
+                    span.checkmark
+                    label.form-check-label(for='music')
+                      | MUSIC
+                .form-check
+                    input#whistle.form-check-input(
+                    type='radio', 
+                    name='radio2', 
+                    value='whistle')
+                    span.checkmark
+                    label.form-check-label(for='whistle')
+                      | WHISTLE
+
+      #right_side.col-3.d-flex.flex-row
+        .col-8
+        .col-4
+          #sidebar.d-flex.align-items-end.flex-column
+            a(href='index.html')
+              i.fas.fa-times.fa-2x
+            .mt-auto.p-2.title POMODORO
+
+  script(src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js")
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.1.1/vuex.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.15/dayjs.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.js')
+  script(src="./js/index.js")

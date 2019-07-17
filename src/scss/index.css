@@ -1,0 +1,63 @@
+* {
+  font-family: 'Roboto';
+  font-weight: bold;
+}
+
+.col-8 {
+  background-color: #FFEDF7;
+}
+
+.col-8 .form-group {
+  margin-left: 85px;
+}
+
+.col-8 .form-group .form-check {
+  color: #003164;
+}
+
+.col-8 .form-group #addNew {
+  margin-top: 48px;
+}
+
+.col-8 .form-group #thingsToDo1 {
+  margin-top: 249px;
+  font-size: 24px;
+  color: #003164;
+}
+
+.col-8 .form-group #things {
+  margin-top: 613px;
+  margin-bottom: 76px;
+  font-size: 16px;
+  color: #003164;
+}
+
+.col-8 .form-group .more {
+  color: #FF4384;
+}
+
+.col-4 {
+  background-color: #003164;
+}
+
+.title {
+  margin-top: 587px;
+  color: white;
+  font-size: 24px;
+  -webkit-writing-mode: vertical-lr;
+      -ms-writing-mode: tb-lr;
+          writing-mode: vertical-lr;
+}
+
+.icon {
+  color: white;
+}
+
+.icon i {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 48px;
+  font-size: 24px;
+}
+/*# sourceMappingURL=index.css.map */
