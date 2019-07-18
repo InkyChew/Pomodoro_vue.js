@@ -37,9 +37,11 @@ body
           #addNew
             input.form-control(
               v-model="newMission"
-              type='text'
+              type="text"
+              placeholder="ADD A NEW MISSION"
               @click="newMission=''"
-              @blur="newMission='ADD A NEW MISSION'"
+              @focus="onfocus"
+              @blur="onblur"
               @keypress.enter="addNewMission(newMission)"
             )
             a(
@@ -70,7 +72,7 @@ body
           #things.mt-auto
             template(
               v-for="(todo, i) in todos"
-              v-if="1<=i && !todo.completed"
+              v-if="i>=1 && !todo.completed"
             )
               .form-check
                 input#thingsToDo.form-check-input(

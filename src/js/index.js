@@ -27,7 +27,8 @@ var vm = new Vue({
     ],
     minZero: false,
     secZero: false,
-    newMission: 'ADD A NEW MISSION',
+    newMission: '',
+    placeholder: '',
     parse: false,
     once: true,
     bar: null
@@ -47,6 +48,9 @@ var vm = new Vue({
   },
   methods: {
     addNewMission (mission) {
+      if (mission === '') {
+        return
+      }
       this.todos.push(
         {
           completed: false,
@@ -97,6 +101,15 @@ var vm = new Vue({
         color: '#FF4384',
         svgStyle: null,
       });
+    },
+    onfocus(event) {
+      console.log(event)
+      console.log(event.target.placeholder)
+      this.placeholder = event.target.placeholder
+      event.target.placeholder = ''
+    },
+    onblur(event) {
+      event.target.placeholder = this.placeholder
     }
   },
   mounted (){
