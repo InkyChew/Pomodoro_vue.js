@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development gulp",
     "build": "cross-env NODE_ENV=production gulp",
-    "deploy": "gh-pages -d dist"
+    "gh": "gh-pages -d dist",
+    "deploy": "npm run build && npm run gh"
   },
   "author": "",
   "license": "ISC",
