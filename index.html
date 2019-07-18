@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="mt-auto" id="things">
-            <template v-for="(todo, i) in todos" v-if="i&gt;=1 &amp;&amp; i&lt;=5 &amp;&amp; !todo.completed">
+            <template v-for="(todo, i) in todos" v-if="i&gt;=1 &amp;&amp; !todo.completed">
               <div class="form-check">
                 <input class="form-check-input" id="thingsToDo" type="checkbox" v-model="todo.completed"><span class="checkmark"></span>
                 <label class="form-check-label" for="thingsToDo" :class="{completed : todo.completed}">{{ todo.content }}</label><a href="javascript:;" @click="switchToFirst(i)"><i class="far fa-play-circle fa-lg"></i></a>
